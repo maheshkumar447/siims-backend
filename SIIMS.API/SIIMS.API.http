@@ -1,0 +1,6 @@
+@SIIMS.API_HostAddress = http://localhost:5128
+
+GET {{SIIMS.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
