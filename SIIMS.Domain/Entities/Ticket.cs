@@ -1,5 +1,6 @@
 ﻿using SIIMS.Domain.Common;
 using SIIMS.Domain.Enums;
+using SIIMS.Domain.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,15 @@ namespace SIIMS.Domain.Entities
 
         public Ticket(string title, string description, TicketCategory category, TicketPriority priority, Guid createdByUserId)
         {
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                throw new InvalidTicketDataException("Ticket title cannot be empty.");
+            }
+
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                throw new InvalidTicketDataException("Ticket description cannot be empty.");
+            }
             Title = title;
             Description = description;
             Category = category;
@@ -46,6 +56,10 @@ namespace SIIMS.Domain.Entities
         /// </summary>
         public void AssignTo(Guid userId)
         {
+            if(Status == TicketStatus.Closed)
+            {
+                throw new InvalidTicketOperationException("Cannot assign a ticket that is already closed.");
+            }
             AssignedToUserId = userId;
             Status = TicketStatus.InProgress;
             MarkAsUpdated();
@@ -57,6 +71,14 @@ namespace SIIMS.Domain.Entities
         /// </summary>
         public void UpdateStatus(TicketStatus newStatus)
         {
+            if (Status == TicketStatus.Closed)
+                throw new InvalidTicketOperationException(
+                    "Closed tickets cannot change status.");
+
+            if (Status == TicketStatus.Open && newStatus == TicketStatus.Closed)
+                throw new InvalidTicketOperationException(
+                    "Ticket must be resolved before closing.");
+
             Status = newStatus;
             MarkAsUpdated();
         }
