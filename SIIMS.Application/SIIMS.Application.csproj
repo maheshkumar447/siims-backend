@@ -10,4 +10,8 @@
     <ProjectReference Include="..\SIIMS.Domain\SIIMS.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>
+
 </Project>

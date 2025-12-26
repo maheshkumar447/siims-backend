@@ -12,7 +12,6 @@ namespace SIIMS.Domain.Entities
     /// <summary>
     /// Represents a support ticket raised by a user.
     /// This entity contains core business data and rules related to a ticket.
-    /// Question: Why private set?
     /// </summary>
     public class Ticket : BaseEntity
     {

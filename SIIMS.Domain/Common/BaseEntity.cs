@@ -9,7 +9,6 @@ namespace SIIMS.Domain.Common
     /// <summary>
     /// Base class for all domain entities.
     /// Provides common properties such as Id and audit fields.
-    /// Questions: 1. Why abstract? Why protected set? Why Guid? What will happen at NewGuid();?
     /// </summary>
     public abstract class BaseEntity
     {
