@@ -1,8 +1,12 @@
+using SIIMS.Infrastructure.DependencyInjection;
+using SIIMS.Application.UseCases.Tickets;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddScoped<CreateTicketUseCase>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

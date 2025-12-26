@@ -4,13 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using SIIMS.Application.Interfaces.Repositories;
 using SIIMS.Infrastructure.Persistence.Context;
 using SIIMS.Infrastructure.Persistence.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SIIMS.Infrastructure.DepedencyInjection
+namespace SIIMS.Infrastructure.DependencyInjection
 {
     public static class InfrastructureServiceRegistration
     {
