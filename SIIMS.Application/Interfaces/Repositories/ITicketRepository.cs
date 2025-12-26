@@ -15,7 +15,7 @@ namespace SIIMS.Application.Interfaces.Repositories
     {
         Task AddAsync(Ticket ticket);
 
-        Task<Ticket?> GeByIdAsync(Guid ticketId);
+        Task<Ticket?> GetByIdAsync(Guid ticketId);
 
         Task UpdateAsync(Ticket ticket);
     }
