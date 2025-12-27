@@ -14,10 +14,12 @@ namespace SIIMS.API.Controllers
     public class TicketsController : ControllerBase
     {
         private readonly CreateTicketUseCase _createTicketUseCase;
+        private readonly GetTicketByIdUseCase _getTicketByIdUseCase;
 
-        public TicketsController(CreateTicketUseCase createTicketUseCase)
+        public TicketsController(CreateTicketUseCase createTicketUseCase, GetTicketByIdUseCase getTicketByIdUseCase)
         {
             _createTicketUseCase = createTicketUseCase;
+            _getTicketByIdUseCase = getTicketByIdUseCase;
         }
 
         /// <summary>
@@ -28,6 +30,16 @@ namespace SIIMS.API.Controllers
         {
             var result = await _createTicketUseCase.ExecuteAsync(request);
             return CreatedAtAction(nameof(CreateTicket), result);
+        }
+
+        /// <summary>
+        /// Retrieves a ticket by its unique identifier.
+        /// </summary>
+        [HttpGet("{id:guid}")]
+        public async Task<IActionResult> GetTicketById(Guid id)
+        {
+            var ticket = await _getTicketByIdUseCase.ExecuteAsync(id);
+            return Ok(ticket);
         }
     }
 }

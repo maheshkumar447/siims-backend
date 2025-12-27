@@ -35,7 +35,16 @@ namespace SIIMS.API.Middleware
 
                 await WriteErrorResponse(context, HttpStatusCode.BadRequest, ex.Message);
             }
-            catch(Exception ex)
+            catch (SIIMS.Application.Common.NotFoundException ex)
+            {
+                _logger.LogInformation(ex, "Resource not found");
+
+                await WriteErrorResponse(
+                    context,
+                    HttpStatusCode.NotFound,
+                    ex.Message);
+            }
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "Unhandled exception occurred");
 
