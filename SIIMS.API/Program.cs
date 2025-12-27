@@ -1,5 +1,6 @@
 using SIIMS.Infrastructure.DependencyInjection;
 using SIIMS.Application.UseCases.Tickets;
+using SIIMS.API.Middleware;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -24,6 +25,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.MapControllers();
 
 app.Run();
